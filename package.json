@@ -9,7 +9,7 @@
     "build": "jus build . dist",
     "commit": "git add dist && git commit -m 'update dist'",
     "push": "git subtree push --prefix dist origin master",
-    "open": "open https://wmhilton.com"
+    "open": "opener https://wmhilton.com"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/wmhilton/wmhilton.github.io/issues"
   },
-  "homepage": "https://github.com/wmhilton/wmhilton.github.io#readme"
+  "homepage": "https://github.com/wmhilton/wmhilton.github.io#readme",
+  "devDependencies": {
+    "opener": "^1.4.1"
+  }
 }
