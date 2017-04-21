@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/wmhilton/wmhilton.github.io#readme",
   "devDependencies": {
+    "jus": "^0.24.1",
     "opener": "^1.4.1"
   }
 }
