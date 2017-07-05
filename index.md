@@ -53,3 +53,11 @@ My parents often wonder, [but I do have a plan](https://github.com/project-leibn
 My plan is to migrate content from <https://sites.google.com/site/wmhilton/home> over here, since Github is the place to be these days. That's been my plan since 2014 though so don't hold your breath. I should make that part of my 5-year plan.
 
 Meanwhile, perhaps you'd like to peruse some of my code projects over at [@wmhilton](https://github.com/wmhilton)?
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-2801081832848971",
+    enable_page_level_ads: true
+  });
+</script>
