@@ -11,7 +11,7 @@ The University of Cincinnati's Robotics Team had a DYNA MYTE 2400 CNC machine si
 
 I sent them the code, and a link to this YouTube video to encourage them to machine the postcard. However, no one understood the machine as well as I did, and they weren't able to get the code entered while I was in California. It wasn't until I returned and entered the code myself that the postcard became a physical reality.
 
-You can try the emulator yourself here: [CNC_Simulator.html](CNC_Simulator) It is just an HTML page with the Javascript source code embedded and no external references. Here are some sample CNC programs you can try:
+You can try the emulator yourself here: [CNC_Simulator.html](CNC_Simulator.html) It is just an HTML page with the Javascript source code embedded and no external references. Here are some sample CNC programs you can try:
 
 - [CNC_Spiral.txt](CNC_Spiral.txt) - A simple example
 - [CNC_D-SUB_PROGRAM.txt](CNC_D-SUB_PROGRAM.txt) - A program for cutting D-SUB sockets in sheet metal, which was the first use of the machine for the robotics team.
