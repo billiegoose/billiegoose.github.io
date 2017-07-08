@@ -1,0 +1,101 @@
+This program should cut out an outline, a few letters, and then a rectangular
+border, resulting in a metal postcard about 6" wide (X dir) by 5" high (Y dir).
+
+Set the zero point of the drill tip at the bottom-left corner of the rectangle
+that will be printed, leaving room for the machine to draw 6" in the positive X
+and Y directions. I *think* it had room for 6 inches, it says in the manual what
+the box size is. I *think* it was 6"x8" but I could be way off.
+
+I'm reusing as many settings as possible from the D-SUB cutting program.
+
+START MM  02 // Use millimeters. Program ID 01 is taken by the D-SUB program I think.
+ TD=   3.175 // Tool diameter: 1/8 in = 3.175 mm
+FR XY  =03.7 // Divided the suggested feedrate by two, because tool was flexing.
+FR Z   =01.2 // Feedrate based on 1 cutting edge, instead of 4, then slightly reduced.
+SETUP >zcxyu // Allow user to position tool above bottom-left corner.
+Z>C          // Raise tool
+GOfX   8.500 // Point 1 of Figure 1
+GOfY 121.000 //
+GO Z-  9.000 // Insert tool
+GO X   8.000 // Point 2 
+   Y 119.000 //
+GO X   9.000 // Point 3
+   Y 110.500 //
+GO X   6.500 // Point 4
+   Y 100.500 //
+GO X  12.500 // Point 5
+   Y  92.500 //
+GO X  13.500 // Point 6
+   Y  83.500 //
+GO X  25.000 // Point 7
+   Y  70.500 //
+GO X  25.500 // Point 8
+   Y  64.300 //
+GO X  28.000 // Point 9
+   Y  60.500 //
+GO X  30.000 // Point 10
+   Y  60.500 //
+GO X  32.000 // Point 11
+   Y  57.500 //
+GO X  30.000 // Point 12
+   Y  55.000 //
+GO X  31.000 // Point 13
+   Y  51.500 //
+GO X  43.500 // Point 14
+   Y  31.000 //
+GO X  53.000 // Point 15
+   Y  30.000 //
+GO X  63.000 // Point 16
+   Y  25.500 //
+GO X  74.000 // Point 17
+   Y  16.000 //   
+GO X  76.500 // Point 18
+   Y   9.000 //   
+GO X 100.000 // Point 19
+   Y  11.000 //   
+GO X  99.500 // Point 20
+   Y  21.000 //   
+GO X 103.500 // Point 21
+   Y  28.000 //   
+GO X  99.000 // Point 22
+   Y  36.000 //   
+GO X  47.500 // Point 23
+   Y  83.500 //   
+GO X  47.500 // Point 24
+   Y 121.000 //   
+GO X   8.500 // Return to Point 1
+   Y 121.000 //
+Z>C          // Raise tool
+GOfX  78.000 // Point 1 of Figure 2
+GOfY 103.500 //
+GO Z-  9.000 // Insert tool
+GO Y  73.000 // Point 2
+GO Y  89.000 // Point 3 
+GO X  98.000 // Point 4 
+GO Y 103.500 // Point 5
+GO Y  73.000 // Point 6
+Z>C          // Raise tool
+GOfX 110.000 // Point 1 of Figure 3
+GO Z-  9.000 // Insert tool
+GO Y  85.000 // Point 2 of Figure 3
+Z>C          // Raise tool
+GOfY  92.000 // Point 3 
+GO Z-  9.000 // Insert tool
+Z>C          // Raise tool
+GOfX 124.500 // Point 1 of Figure 4
+GOfY  73.000 //
+GO Z-  9.000 // Insert tool
+Z>C          // Raise tool
+GOfY  79.000 // Point 2 of Figure 4
+GO Z-  9.000 // Insert tool
+GO Y 100.000 // Point 3 of Figure 4
+Z>C          // Raise tool
+GOfX   0.000 // Return home
+GOfY   0.000 //
+GO Z-  9.000 // Insert tool
+GO X 144.000 // Point 2 of border
+GO Y 126.000 // Point 3 of border
+GO X   0.000 // Point 4 of border
+GO Y   0.000 // Return home.
+Z>C          // Raise tool
+END NEW PART //

@@ -1,0 +1,802 @@
+<!--
+layout: false
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+Useful websites:
+Comparison of Canvas and SVG
+http://people.mozilla.com/~vladimir/xtech2006/
+
+Canvas Tutorial
+https://developer.mozilla.org/en/Canvas_tutorial/
+
+Animating with Javascript + Canvas
+http://dev.opera.com/articles/view/blob-sallad-canvas-tag-and-javascrip/
+-->
+<title>CNC Simulator</title>
+
+<script type="text/javascript">
+// Global variables
+var temp = "";
+var start_second = 0;
+var intervalID = 0;
+var running = true;
+var seconds = 0; // 6 degrees
+var time_inc = 1; // in seconds
+var sec_hand_length = 70;
+var min_hand_length = 65;
+var hour_hand_length = 35;
+var clock_radius = 75;
+
+
+// Function to run as soon as page loads
+function init()
+{
+    var d = new Date();
+    var curr_hour = d.getHours();
+    var curr_min = d.getMinutes();
+    start_second = d.getSeconds();
+    seconds = start_second + 60*curr_min + 60*60*((curr_hour) % 12);
+    intervalID = window.setInterval(animate,1000);
+    
+    // Initialize the canvas.
+    
+}
+
+
+
+// Animate one frame of the animation
+function animate()
+{
+    var canvas = document.getElementById("cnc_canvas");
+    var ctx = canvas.getContext("2d");
+    var sec_angle = 0;
+    var min_angle = 0;
+    var hour_angle = 0;
+    //alert("Breakpoint animate");
+    // Always put the terminating code near the top in case there is an error later on and the function exits before it can stop the interval timer.
+    seconds = seconds + time_inc;
+    //if (seconds % 60 > (3+start_second) % 60) {
+    //    stop();
+    //}
+    
+    with (ctx) {
+        // What? No "clear canvas" command?
+        clearRect(0,0,400,600);
+        
+        // Draw clock face
+        strokeStyle = "black";
+        lineWidth = 1;
+        beginPath();
+        arc(100, 100, clock_radius, 0.001, 2*Math.PI, false);
+        //alert("Breakpoint arc");
+        stroke();
+        //alert("Breakpoint stroke");
+        
+        // Draw second hand.
+        lineWidth = 1;
+        strokeStyle = "green";
+        beginPath();
+        moveTo(100,100);
+        sec_angle = 180-360/60*seconds;
+        //alert("Breakpoint sec_angle = " + String(sec_angle));
+        temp = "x = " + String(100+sec_hand_length*Sin(sec_angle)) + " y = " + String(100+sec_hand_length*Cos(sec_angle));
+        //alert("Breakpoint " + temp);        
+        lineTo(100+sec_hand_length*Sin(sec_angle), 100+sec_hand_length*Cos(sec_angle));
+        //alert("Breakpoint lineTo");
+        stroke();
+        
+        // Draw minute hand.
+        beginPath();
+        strokeStyle = "red";
+        lineWidth = 2;
+        moveTo(100,100);
+        min_angle = 180-360/60*seconds/60;
+        lineTo(100+min_hand_length*Sin(min_angle), 100+min_hand_length*Cos(min_angle));
+        stroke();
+        
+        // Draw hour hand.
+        lineWidth = 3;
+        strokeStyle = "blue";
+        beginPath();
+        moveTo(100,100);
+        hour_angle = 180-360/12*seconds/60/60;
+        lineTo(100+hour_hand_length*Sin(hour_angle), 100+hour_hand_length*Cos(hour_angle));
+        stroke();
+    }
+}
+
+function stop() {
+    window.clearInterval(intervalID);
+    running = false;
+}
+function start() {
+    time_inc = 1;
+    // Only start if we're not already running an animation.
+    if (!running) {
+        running = true;
+        intervalID = window.setInterval(animate,1000);
+    }
+}
+function start_high_speed() {
+    // If we're not already running an animation.
+    if (running) {
+        // Kill previous interval
+        stop();
+    }
+    time_inc = 15;
+    running = true;
+    intervalID = window.setInterval(animate,10);        
+}
+
+function d2r(degrees) {
+    return degrees*Math.PI/180;
+}
+function Sin(degrees) {
+    return Math.sin(d2r(degrees));
+}
+function Cos(degrees) {
+    return Math.cos(d2r(degrees));
+}
+</script>
+
+
+<style type="text/css">
+td {
+    padding-top: 10px;
+}
+</style>
+</head>
+
+<body onload="init()">
+<h2 style="margin-bottom: 0">CNC Simulator</h2>
+<table>
+ <tr>
+  <td style="vertical-align: top">
+   <div style="border-width: 5px; border-style: ridge;">
+    <p style="font-weight: bold; margin: 10px">
+     <span id="x_disp">X:</span>
+     <br>
+     <span id="y_disp">Y:</span>
+     <br>
+     <span id="z_disp">Z:</span>
+     <br>
+     <span id="time_disp">Time:</span>
+    </p>
+   </div>
+   <form action="">
+    <table>
+     <tr>
+      <td>
+        <label for="ppi_input">Pixels per inch:</label>
+        <br>
+        <input id="ppi_input" type="text" value="127" style="width: 5em">
+      </td>
+      <td>
+       <label for="time_step_input">Time step:</label>
+       <br>
+       <input id="time_step_input" type="text" value="1" style="width: 5em">
+      </td>
+     </tr>
+     <tr>
+      <td>
+        <label for="speed_input">Speed factor:</label>
+        <br>
+        <input id="speed_input" type="text" value="5" style="width: 5em; margin-right: 5em;">
+      </td>
+      <td>
+        <label for="blitz_input">Blitz mode:</label>
+        <input type="checkbox" id="blitz_input" checked="checked">
+      </td>
+     </tr>
+     <tr>
+      <td>
+        <label for="offset_x">Offset X:</label>
+        <br>
+        <input id="offset_x" type="text" value="50" style="width: 5em; margin-right: 5em;">
+      </td>
+      <td>
+        <label for="offset_y">Offset Y:</label>        
+        <br>
+        <input id="offset_y" type="text" value="50" style="width: 5em; margin-right: 5em;">
+      </td>
+     </tr>
+     <tr>
+      <td colspan="2">
+    <label for="code_input">Enter CNC code here:<br></label>
+    <textarea rows="20" cols="50" id="code_input">START MM  01 // Use millimeters, program ID 01
+ TD=   3.175 // Tool diameter: 1/8 in = 3.175 mm
+FR XY  =03.7 // Divided the suggested feedrate by two, because tool was flexing.
+FR Z   =01.2 // Feedrate based on 1 cutting edge, instead of 4, then slightly reduced.
+SETUP &gt;zcxyu // Allow user to position tool above 1st hole.
+REPEAT    02 // Second traverse gets the edges better
+GOfX   0.000 // Go to 1st hole
+GOfY   0.000 //
+GO Z-  6.000 // Drill 1st hole
+Z&gt;C          // Raise tool
+CALL SUB  10 // Cut left side...
+ZERO AT      // (Set origin to right hole)
+   X  47.000 // * Change depending on connector *
+   Y   0.000 //
+CALL SUB  11 // ...Cut right side...
+ZERO AT      // (Reset origin to left hole)
+   X- 47.000 // * Change depending on connector *              
+   Y   0.000 //
+GO X   6.920 // ...And return to Point 1.
+   Y   3.410 //
+Z&gt;C          // Raise tool
+GOfX  47.000 // Go to 2nd hole * Change depending on connector *
+   Y   0.000 //
+GO Z  -6.000 // Drill 2nd hole
+Z&gt;C          // Raise tool
+REPEAT END   //
+END NEW PART //
+
+SUB 10       // Left Side (located on line 050)
+GO X   6.920 // Point 1
+   Y   3.410 //
+GO Z-  9.000 // Insert tool
+ARC          // Point 2
+ XC=   6.920 //
+ YC=   1.500 //
+  a= 101.470 //
+GO X   5.740 // Point 3
+   Y-  2.280 //
+ARC          // Point 4
+ XC=   7.120 //
+ YC=-  2.000 //
+  a=  79.530 //
+SUB RETURN   //
+
+SUB 11       // Right Side (located on line 100)
+GO X-  7.120 // Point 5
+   Y-  3.410 //
+ARC          // Point 6
+ XC=-  7.120 //
+ YC=-  2.000 //
+  a=  79.530 //
+GO X-  5.050 // Point 7
+   Y   1.120 //
+ARC          // Point 8
+ XC=-  6.920 //
+ YC=   1.500 //
+  a= 101.470 //
+SUB RETURN   //
+    </textarea>
+    <br>
+     <input name="submit" type="button" value="Click To Run Simulator" onclick="startSimulation();">
+     <input id="pause_input" type="button" value="Pause" onclick="pause();">
+    </td>
+    </tr>
+    </table>
+    </form>
+   </td>
+   <td style="vertical-align:top">
+    <canvas id="cnc_canvas" width="780" height="650" style="border:1px solid black"></canvas>
+   </td>
+ </tr>
+</table>
+<hr>
+<div class="output_wrapper">
+ <b>Output:</b>
+ <pre id="output"></pre>
+</div>
+<script type="text/javascript">
+// The so-called Prototype Dollar function, a shortcut for document.getElementById()
+function $() {
+    var elements = new Array();
+    for (var i = 0; i < arguments.length; i++) {
+        var element = arguments[i];
+        if (typeof element == "string")
+            element = document.getElementById(element);
+        if (arguments.length == 1)
+            return element;
+        elements.push(element);
+    }
+    return elements;
+}
+ctx = null;
+canvas = null;
+function clear_vars() {// Global variables
+    unit = "MM"; // or "IN"
+    time_step = 1; // update every half second.
+    ppi = 96; // Pixels per inch
+    cf = 1; // Pixel to unit ratio
+    td = 1; // Tool diameter
+    max_frx = 1; // Maximum feed rate X
+    max_fry = 1; // Maximum feed rate Y
+    max_frz = 1; // Maximum feed rate Z
+    x_inc = 1; // Distance to move per tick
+    y_inc = 1; // Distance to move per tick
+    z_inc = 1; // Distance to move per tick
+    a_inc = 1; // Distance to move per tick
+    mar_x = 10; // Horizontal margin of origin
+    mar_y = 10; // Vertical margin of origin
+    tool_c = 2; // Clearance height.
+    tool_x = 0; // Tool position X
+    tool_y = 0; // Tool position Y
+    tool_z = 0; // Tool position Z
+    tool_a = 0; // Tool angle (used for arcs)
+    arc_r = 0;  // Radius of currently drawn arc.
+    arc_dir = false; // Counter-clockwise
+    old_x = 0;  // Previous tool position X
+    old_y = 0;  // Previous tool position Y
+    old_z = 0;  // Previous tool position Z
+    old_a = 0;  // Previous tool angle (used for arcs)
+    goal_x = 0; // Destination coordinate
+    goal_y = 0; // Destination coordinate
+    goal_z = 0; // Destination coordinate
+    xc = 0; // Used for drawing arcs
+    yc = 0; // Used for drawing arcs
+    ac = 0; // Used for drawing arcs
+    time = 0;   // Time needed to execute cut.
+    time_x = 0;
+    time_y = 0;
+    time_z = 0;
+    time_a = 0; // Used for arcs
+    time_elapsed = 0;
+    n = 0;      // Line index
+    lines = []; // Array of each line of code
+    line = "";  // Current line
+    moving = false; // Set to true when the tool is moving from one point to another.
+    arcing = false; // Set to true when the tool is arcing.
+    interval_id = 0; // Variable needed to stop the timer during real-time mode
+    blitz_done = false; // Variable used to stop the timer in blitz mode.   
+    paused = false; // Pause/unpaused state
+    speed = 1;
+    stack = []; // Line numbers to return to
+    canvas_stack = 0; // How many times restore() the canvas
+    canvas = $("cnc_canvas");
+    ctx = canvas.getContext("2d");   
+}
+function startSimulation() {
+    // Clean up variables from the last run.
+    clear_vars();
+    // Clear debug output
+    $("output").innerHTML = "";
+    // Because the previous run might not have finished
+    for (var i = 0; i < 50; i++) {
+        ctx.restore();
+    }
+    // Stop the clock
+    stop();
+    // Since there is no "clear canvas" command.
+    ctx.fillStyle = "white"
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = "black";
+    /*
+    The canvas has it's origin in the top-left corner, but the CNC
+    Machine has it's origin in the bottom-left corner. Therefore,
+    we translate the origin and apply a transformation matrix to
+    flip the Y direction.
+    */   
+    ctx.save();
+    canvas_stack = canvas_stack + 1;
+    ctx.transform(1, 0, 0, -1, 0, 0);  
+    mar_x = parseFloat($("offset_x").value);
+    mar_y = parseFloat($("offset_y").value);
+    ctx.translate(mar_x, mar_y-canvas.height); 
+    ctx.save();
+    canvas_stack = canvas_stack + 1;
+    
+    lines = $("code_input").value.split("\n"); //str.split("\n");
+    ppi = parseFloat($("ppi_input").value);    
+    // Start the animation sequence
+    n = -1;    
+    debugn("There are " + lines.length + " lines");
+    // Stop all animations
+    window.clearInterval(interval_id);
+    paused = true;
+    pause();
+}
+function pause() {
+    if (paused) {
+        paused = false;
+        // Set the speed
+        speed = parseFloat($("speed_input").value);
+        time_step = parseFloat($("time_step_input").value);
+        // Start the CNC simulation.
+        if ($("blitz_input").checked) {
+            while (blitz_done == false) {
+                tick();
+            }
+        } else {
+            interval_id = window.setInterval(tick,1000*time_step/speed);
+        }
+        $("pause_input").value = "Pause";
+    } else {
+        paused = true;
+        window.clearInterval(interval_id);
+        $("pause_input").value = "Resume";
+    }
+}
+function nextLine() {
+    n = n + 1;
+    if (n >= lines.length) {
+        return false;
+    } else {
+        line = lines[n];
+        return true;
+    }
+}
+function startsWith(s1, s2) {
+    if (s1.substr(0,s2.length) == s2) {
+        return true;
+    } else {
+        return false;
+    }
+}
+function deg2rad(d) {
+    return (Math.PI/180)*d;
+}
+function rad2deg(r) {
+    return (180/Math.PI)*r;
+}
+function tick() {    
+    if (moving) {
+        // Store previous position
+        old_x = tool_x;
+        old_y = tool_y;
+        old_z = tool_z;
+        old_a = tool_a;
+        // Figure out new position
+        if (time < time_step) {
+            if (arcing) {
+                tool_a = goal_a;
+                tool_x = xc + Math.cos(tool_a)*arc_r;
+                tool_y = yc + Math.sin(tool_a)*arc_r;
+            } else {
+                tool_x = goal_x;
+                tool_y = goal_y;
+                tool_z = goal_z;
+            }
+            time_elapsed = time_elapsed + time;
+        } else {
+            if (arcing) {
+                tool_a = tool_a + a_inc;
+                tool_x = xc + Math.cos(tool_a)*arc_r;
+                tool_y = yc + Math.sin(tool_a)*arc_r;
+            } else {
+                tool_x = tool_x + x_inc;
+                tool_y = tool_y + y_inc;
+                tool_z = tool_z + z_inc;
+            }
+            time_elapsed = time_elapsed + time_step;
+        }              
+        // Update display
+        $("x_disp").innerHTML = "X: " + tool_x;
+        $("y_disp").innerHTML = "Y: " + tool_y;
+        $("z_disp").innerHTML = "Z: " + tool_z;
+        $("time_disp").innerHTML = "Time: " + time_elapsed;
+        
+        // Draw line if tool is below surface.
+        if (tool_z < 0) {
+            with (ctx) {            
+                // Draw hole
+                beginPath();
+                fillStyle = "black";
+                arc(tool_x, tool_y, td/2.0, 0, Math.PI*2.0, true);
+                fill();
+                // Draw line
+                lineCap = "round";
+                lineWidth = td;
+                beginPath();
+                strokeStyle = "black";
+                if (arcing) {                    
+                    arc(xc, yc, arc_r, old_a, tool_a, arc_dir);
+                } else {                    
+                    moveTo(old_x, old_y);                
+                    lineTo((tool_x), (tool_y));
+                }
+                stroke();                  
+            }
+        } else {
+            // Draw hollow dot (so we can see the path of the tool)
+            with (ctx) {  
+                lineWidth = 1/cf;
+                strokeStyle = "blue";
+                strokeRect((tool_x)-1/cf, (tool_y) -1/cf, 3/cf, 3/cf);
+            }
+        }
+        // Decrease time
+        time = time - time_step;
+        // Finish line
+        if (time < 0) {
+            time = 0;
+            moving = false;
+            arcing = false;
+        }
+        debug(".");
+    } else {
+        // Always safest to put this first, in case of unhandled syntax
+        // errors later on in the code.
+        if (nextLine()) {
+            ndebug("Line " + n + ": ");
+        } else {
+            ndebug("Ended because there are no more lines.");
+            n = -1;
+            ndebug("canvas_stack = " + canvas_stack);
+            for (var i = 0; i < canvas_stack; i++) {
+                ndebug("ctx.restore()");
+                ctx.restore();
+            }
+            blitz_done = true;
+            window.clearInterval(interval_id);
+            return;
+        }
+        //debug(line);
+        if (startsWith(line, "START")) {
+            // Set unit
+            unit = line.substr(6,2);
+            debugd("Unit: " + unit);
+            if (unit == "MM") {
+                debugd("Millimeters");
+                cf = ppi / 25.4;
+            } else if (unit == "IN") {
+                debugd("Inches");
+                cf = ppi;
+            } else {
+                ndebug("Invalid unit");
+                n = lines.length;
+                return;
+            }
+            debug("Scale: " + cf);
+            ctx.scale(cf, cf);
+        } else if (startsWith(line, " TD=")) {
+            // Set tool diameter
+            debugd("Tool Diameter: " + line.substring(4,12));
+            td = parseFloat(line.substring(4,12));
+            ctx.lineWidth = td;            
+            debug("ctx.lineWidth = " + ctx.lineWidth);
+        } else if (startsWith(line, "FR")) {
+            // TODO: set feed rate
+            debugd("Setting feed rate for " + line.substr(3,3) + " to " + line.substring(8,12));
+            if (line.indexOf("X") != -1) {
+                max_frx = parseFloat(line.substring(8,12));
+                debug(" set FR X = " + max_frx);
+            }
+            if (line.indexOf("Y") != -1) {
+                max_fry = parseFloat(line.substring(8,12));
+                debug(" set FR Y = " + max_fry);
+            }
+            if (line.indexOf("Z") != -1) {
+                max_frz = parseFloat(line.substring(8,12));
+                debug(" set FR Z = " + max_frz);
+            }
+        } else if (startsWith(line, "SETUP")) {
+            // This step doesn't translate well, and would get annoying
+            debug("Setup: " + line.substring(7,12));
+            debug(" Note: in real life, this command would let you position the tool at a new 'zero' position.");
+        } else if (startsWith(line, "Z>C")) {
+            tool_z = tool_c;
+            debug("Z>C: Z = " + String(tool_c));
+        } else if (startsWith(line, "GO")) {
+            goal_x = tool_x; time_x = 0;
+            goal_y = tool_y; time_y = 0;
+            goal_z = tool_z; time_z = 0;
+            debugd("Go");
+            do {
+                if (line.substr(3,1) == "f") {
+                    // TODO: how fast is "fast" anyway?
+                }
+                if (line.substr(3,1) == "X") {
+                    goal_x = parseFloat(line.substring(5,12));
+                    if (line.substr(4,1) == "-") {
+                        goal_x = -goal_x;
+                    }                    
+                    time_x = Math.abs((goal_x - tool_x) / max_frx);
+                    debugd("X coor: " + goal_x);
+                } else if (line.substr(3,1) == "Y") {
+                    goal_y = parseFloat(line.substring(5,12));
+                    if (line.substr(4,1) == "-") {
+                        goal_y = -goal_y;
+                    }
+                    time_y = Math.abs((goal_y - tool_y) / max_fry);
+                    debugd("Y coor: " + goal_y);
+                } else if (line.substr(3,1) == "Z") {                    
+                    goal_z = parseFloat(line.substring(5,12));                    
+                    if (line.substr(4,1) == "-") {
+                        goal_z = -goal_z;
+                    }
+                    time_z = Math.abs((goal_z - tool_z) / max_frz);
+                    debugd("Z coor: " + goal_z);
+                }
+                n = n+1;
+                if (n >= lines.length) {
+                    break;
+                }
+                line = lines[n];
+            } while (line.substr(0,2) == "  ")
+            n = n - 1;
+            // Compute how many seconds it will take to execute this cut
+            time = Math.max(Math.max(time_x, time_y), time_z);
+            debugd("Time Required: "+time);
+            x_inc = (goal_x - tool_x) / time * time_step;
+            y_inc = (goal_y - tool_y) / time * time_step;
+            z_inc = (goal_z - tool_z) / time * time_step;
+            debug("X inc: " + x_inc + " Y inc: " + y_inc +" Z inc: " + z_inc);
+            moving = true;
+        } else if (startsWith(line, "ZERO AT")) {
+            // Translate the canvas origin
+            debugd("ZERO AT");
+            goal_x = 0; time_x = 0;
+            goal_y = 0; time_y = 0;
+            goal_z = 0; time_z = 0;
+            if (!nextLine()) { return; }
+            while (line.substr(0,2) == "  ") {
+                if (line.substr(3,1) == "X") {
+                    goal_x = parseFloat(line.substring(5,12));
+                    if (line.substr(4,1) == "-") {
+                        goal_x = -goal_x;
+                    }
+                    debug(" X coor: " + goal_x);
+                } else if (line.substr(3,1) == "Y") {
+                    goal_y = parseFloat(line.substring(5,12));                   
+                    if (line.substr(4,1) == "-") {
+                        goal_y = -goal_y;
+                    }
+                    debug(" Y coor: " + goal_y);
+                } else if (line.substr(3,1) == "Z") {                    
+                    goal_z = parseFloat(line.substring(5,12));                    
+                    if (line.substr(4,1) == "-") {
+                        goal_z = -goal_z;
+                    }
+                    debug(" Z coor: " + goal_z);
+                }
+                if (!nextLine()) { break; }
+            } 
+            n = n - 1;
+            // Translate the canvas origin
+            ctx.save();            
+            ctx.translate(goal_x, goal_y);
+            canvas_stack = canvas_stack + 1;
+            // Untranslate tool
+            tool_x = tool_x - goal_x;
+            tool_y = tool_y - goal_y;
+        } else if (startsWith(line, "ARC")) {
+            debugd("ARC");
+            if (!nextLine()) { return; }
+            if (line.substr(0,4) == " XC=") {
+                xc = parseFloat(line.substring(5,12));
+                if (line.substr(4,1) == "-") {
+                    xc = -xc;
+                }
+                debug(" XC: " + xc);
+            } else {
+                debug("I really expected a line starting with ' XC='");
+            }
+            if (!nextLine()) { return; }
+            if (line.substr(0,4) == " YC=") {
+                yc = parseFloat(line.substring(5,12));
+                if (line.substr(4,1) == "-") {
+                    yc = -yc;
+                }
+                debug(" YC: " + yc);
+            } else {
+                debug("I really expected a line starting with ' YC='");
+            }
+            if (!nextLine()) { return; }
+            if (line.substr(0,4) == "  a=") {
+                // I call the variable 'ac' for resemblance
+                ac = parseFloat(line.substring(5,12));
+                if (line.substr(4,1) == "-") {
+                    ac = -ac;
+                    arc_dir = true;
+                } else {
+                    arc_dir = false;
+                }
+                debugd(" AC: " + ac);                
+                ac = deg2rad(ac);
+                debugd("in radians: " + ac); 
+            } else {
+                debug("I really expected a line starting with '  a='");
+            }
+            arc_r = Math.sqrt( Math.pow(xc-tool_x, 2) +
+                               Math.pow(yc-tool_y, 2) );
+            debugd("R = " + arc_r);
+            var dist = Math.abs(arc_r*ac);
+            var xyfr = (max_frx + max_fry)/2;
+            time = dist/xyfr;
+            debugd("Time Required: " + time);            
+            a_inc = ac/time*time_step;
+            debugd("a_inc = " + a_inc);
+            // Math.atan2 seems to be measuring Clockwise from the Y
+            // axis. Ridiculous.
+            tool_a = Math.atan2(tool_y-yc, tool_x-xc);
+            debugd("tool_a = " + rad2deg(tool_a) + " degrees");
+            goal_a = Math.atan2(tool_y-yc, tool_x-xc) + ac;
+            debug("goal_a = " + rad2deg(goal_a) + " degrees");
+            moving = true;
+            arcing = true;
+            //arcing = true;
+        } else if (startsWith(line, "CALL SUB")) {
+            // Push line # onto stack
+            debugd("Calling Sub");
+            stack.push(n);
+            ctx.save();
+            canvas_stack = canvas_stack + 1;
+            // Get the SUB id
+            var sub_id = line.substring(9,12).replace(" ","");
+            var sub_id = "SUB " + sub_id;
+            debugd("Scanning for '" + sub_id +"'");
+            // Move the cursor location to the start of the subroutine.
+            n = -1;
+            while (n < lines.length) {
+                n = n + 1;
+                line = lines[n];
+                if (line.substr(0,sub_id.length) == sub_id) {
+                    debugd("Found '" + sub_id + "' on line " + String(n));
+                    debug("Stack: " + String(stack));
+                    break;
+                }
+            }                
+        } else if (startsWith(line, "SUB RETURN")) {
+            // Return to our line # in the stack.
+            n = stack.pop();
+            ctx.restore();
+            canvas_stack = canvas_stack - 1;
+            debugd("SUB RETURN return to line " + String(n));
+            debug("Stack: " + String(stack));
+        } else if (startsWith(line, "REPEAT END")) {
+            if (stack.length > 0) {
+                n = stack.pop();
+                debug("REPEAT END return to line " + String(n));
+            } else {
+                debug("Passing REPEAT END");
+            }
+        } else if (startsWith(line, "REPEAT")) {
+            var rep_num = parseInt(line.substring(10,12))
+            debugd("REPEAT " + String(rep_num) + " times");
+            for (var i = 1; i < rep_num; i++) {
+                stack.push(n);
+            }
+            debug("Stack: " + String(stack));
+        } else if (startsWith(line, "END")) {
+            n = lines.length;
+            debug("Encountered an END");
+        } else {
+            debug("Skipping line: " + line);
+        }
+    }  
+}
+
+/*
+These are placed at the end, so if prior code has syntax errors,
+the page will clearly be broken.
+*/
+function debug(str) {
+    var obj;
+    obj = $("output");
+    obj.innerHTML = obj.innerHTML + str;
+}
+function ndebug(str) {
+    var obj;
+    obj = $("output");
+    obj.innerHTML = obj.innerHTML + "\n" + str;
+}
+function debugn(str) {
+    var obj;
+    obj = $("output");
+    obj.innerHTML = obj.innerHTML + str + "\n";
+}
+function ndebugn(str) {
+    var obj;
+    obj = $("output");
+    obj.innerHTML = obj.innerHTML + "\n" + str + "\n";
+}
+function debugd(str) {
+    var obj;
+    obj = $("output");
+    obj.innerHTML = obj.innerHTML + str + "... ";
+}
+</script>
+<footer>
+<hr>
+<p style="text-align: center; font-style:italic"><a href="http://validator.w3.org/#validate-by-upload">Freaking valid HTML5 baby!!!</a></p>
+</footer>
+</body>
+</html>

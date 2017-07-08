@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Javascript CNC Machine Emulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//yegor256.github.io/tacit/tacit.min.css">
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ffb300">
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffb300">
+    <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffb300">
+    <!-- http://realfavicongenerator.net/favicon_result?file_id=p1akurqbdbq0j1lpc14a618p2och6#.V1uVj_krK70 -->
+  </head>
+  <body>
+    <header>&#xA0;</header>
+    <section>
+      <article>
+        <!--
+title: Javascript CNC Machine Emulator
+-->
+<h1 id="javascript-cnc-machine-emulator" class="deep-link"><a href="#javascript-cnc-machine-emulator">Javascript CNC Machine Emulator</a></h1>
+<p>The University of Cincinnati&apos;s Robotics Team had a DYNA MYTE 2400 CNC machine sitting in its lab for several years. After sitting unused for many years, someone found the manual and I quickly made it my project to learn how to use it. During my time in California, I developed an urge to send a unique kind of postcard to my friends at the Robotics Team at UC - a CNC-it-yourself postcard. Having written a report on CNC machines comparing G-code with the native language of the DYNA MYTE 2400 the previous quarter, I knew the basic commands by heart (and could reference the manual for the rest). After coming up with my design for the postcard and writing out the code I thought would produce it, I decided I needed some way to test it before I sent it to the team. So I spent a couple of nights learning how to use the HTML5 <code>&lt;canvas&gt;</code> element and made a quick 2D emulator to parse my DYNA MYTE code and render it.</p>
+<div class="youtube-video"><iframe width="560" height="315" src="https://www.youtube.com/embed/ZL0pXrBJSBo" frameborder="0" allowfullscreen></iframe></div>
+<p><em>Video demonstrating my Javascript emulator of the lab&apos;s CNC machine</em></p>
+<p>I sent them the code, and a link to this YouTube video to encourage them to machine the postcard. However, no one understood the machine as well as I did, and they weren&apos;t able to get the code entered while I was in California. It wasn&apos;t until I returned and entered the code myself that the postcard became a physical reality.</p>
+<p>You can try the emulator yourself here: <a href="CNC_Simulator">CNC_Simulator.html</a> It is just an HTML page with the Javascript source code embedded and no external references. Here are some sample CNC programs you can try:</p>
+<ul>
+<li><a href="CNC_Spiral.txt">CNC_Spiral.txt</a> - A simple example</li>
+<li><a href="CNC_D-SUB_PROGRAM.txt">CNC_D-SUB_PROGRAM.txt</a> - A program for cutting D-SUB sockets in sheet metal, which was the first use of the machine for the robotics team.</li>
+<li><a href="CNC_California.txt">CNC_California.txt</a> - The program seen in the video above.</li>
+<li><a href="CNC_California_Subs.txt">CNC_California_Subs.txt</a> - The same program, but using subroutines.</li>
+<li><a href="CNC_UC_Logo.txt">CNC_UC_Logo.txt</a> - A program for cutting the UC logo into sheet metal. (Note that UC&apos;s Logo is subject to regulations and shouldn&apos;t be used without permission.)</li>
+</ul>
+<p><em>Note</em>: You will have to change the Pixels per Inch setting based on your monitor to scale the image if it doesn&apos;t fit.</p>
+
+      </article>
+    </section>
+    <footer>&#xA0;</footer>
+  </body>
+</html>
