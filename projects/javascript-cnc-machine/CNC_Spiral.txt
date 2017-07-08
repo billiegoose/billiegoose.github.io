@@ -1,0 +1,36 @@
+// Draw a spiral
+START IN  
+ TD=   0.075
+FR XY  =0.20
+GO Z- .1
+REPEAT     4
+ZERO AT
+   X- 0.1
+   Y  0.0
+ARC
+ XC= 0
+ YC= 0
+  a= 90
+ZERO AT
+   X 0
+   Y -.1
+ARC
+ XC= 0
+ YC= 0
+  a= 90
+ZERO AT
+   X .1
+   Y 0
+ARC
+ XC= 0
+ YC = 0
+  a = 90
+ZERO AT
+   X 0
+   Y .1
+ARC
+ XC= 0
+ YC= 0
+  a= 90
+REPEAT END
+END

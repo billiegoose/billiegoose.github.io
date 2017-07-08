@@ -1,0 +1,117 @@
+START MM  01 // Use millimeters, program ID 01
+ TD=   3.175 // Tool diameter: 1/8 in = 3.175 mm
+FR XY  =03.7 // Divided the suggested feedrate by two, because tool was flexing.
+FR Z   =01.2 // Feedrate based on 1 cutting edge, instead of 4, then slightly reduced.
+SETUP >zcxyu // Allow user to position tool above 1st hole.
+GOfX  13.000
+GOfY  174
+GO Z-  3.000
+GO Y  167
+GO X 30
+GO Y 85
+ARC
+ XC= 73
+ YC= 88
+  a= 94
+GO X 80
+   Y 45
+ARC
+ XC= 130
+ YC= 83
+  a= 45
+GO X 123
+   Y 20
+GO Y 27
+   X 125
+ARC 
+ XC= 138
+ YC= 89
+  a=-140
+GO X 110
+   Y 145
+GO Y 154
+ARC
+ XC= 131
+ YC= 89
+  a= 105
+GO X 75
+GO Y 51
+ARC
+ XC= 76
+ YC= 83
+  a=-90
+GO X 44
+   Y 84
+GO Y 174
+GO X 13
+Z>C
+
+GOfX 100
+GOfY 175
+GO Z- 9
+GO Y 167
+GO X 128
+GO Y 175
+GO X 100
+Z>C
+
+GOfX 130
+GOfY 158
+GO Z-9
+GO Y 80
+ARC
+ XC= 96
+ YC= 83
+  a=-40
+GO X 120
+   Y 59
+ARC
+ XC= 144
+ YC= 83
+  a=-40
+GO X 110
+   Y 80
+GO Y 124
+ARC
+ XC= 150
+ YC= 88
+  a= 164
+GO X 178
+GO Y 43
+GO X 176
+   Y 45
+ARC
+ XC= 157
+ YC= 91
+  a=-60
+GO X 126
+   Y 53
+ARC
+ XC= 105
+ YC= 87
+  a= 55
+GO X 145
+   Y 83
+GO Y 152
+ARC
+ XC= 149
+ YC= 121
+  a=-85
+GO X 180
+GO Y 127
+GO X 186
+   Y 126
+GO X 190
+   Y 154
+GO X 184
+   Y 155
+GO X 183
+   Y 148
+ARC
+ XC= 140
+ YC= 65
+  a= 21
+GO X 148
+GO Y 158
+GO X 130
+END

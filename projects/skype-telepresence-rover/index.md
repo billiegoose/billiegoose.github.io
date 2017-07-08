@@ -17,11 +17,13 @@ Part List:
 - Some wood and screws to mount the laptop and Arduino to the RC car
 - Python code (using the Skype API) to send and receive steering and speed commands
 
-[![Arduino + H-bridge test](http://img.youtube.com/vi/QsiM0Cjdzhk/0.jpg)](https://www.youtube.com/watch?v=QsiM0Cjdzhk)
-<br>*This is from an earlier prototype that was built on a chassis that did not have a built-in motor controller.*
+<iframe width="560" height="315" src="https://www.youtube.com/embed/QsiM0Cjdzhk" frameborder="0" allowfullscreen></iframe>
 
-[![Skype Rover 2 - H-bridge Hijack](http://img.youtube.com/vi/UroWCdb6SUo/0.jpg)](https://www.youtube.com/watch?v=UroWCdb6SUo)
-<br>*For my second prototype, I used a complete electric car chassis, and reverse engineered the built-in motor controller. This video demonstrates applying a 3-5V input causing the wheels to spin, drawing power from the built-in battery, not the voltage source.*
+*This is from an earlier prototype that was built on a chassis that did not have a built-in motor controller.*
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/UroWCdb6SUo" frameborder="0" allowfullscreen></iframe>
+
+*For my second prototype, I used a complete electric car chassis, and reverse engineered the built-in motor controller. This video demonstrates applying a 3-5V input causing the wheels to spin, drawing power from the built-in battery, not the voltage source.*
 
 I had hoped to make a video of the robot in action, but have been too distracted to add the joystick control needed to steer the robot properly. In the meanwhile, above are a couple of videos I took during the development of the Skype Rover.
 
