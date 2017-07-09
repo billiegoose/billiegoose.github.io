@@ -1,7 +1,6 @@
 {
   "name": "@wmhilton/wmhilton.github.io.source",
   "version": "1.0.0",
-  "private": true,
   "description": "William Hilton's website",
   "scripts": {
     "start": "jus serve",
