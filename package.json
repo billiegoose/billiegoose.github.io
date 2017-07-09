@@ -4,11 +4,12 @@
   "description": "William Hilton's website",
   "scripts": {
     "start": "jus serve",
-    "deploy": "npm run build && now --static dist",
+    "deploy": "npm run build && (cd dist && rm package.json && now --static)",
     "build": "jus build . dist",
     "commit": "git add dist && git commit -m deploy",
     "push": "git subrepo push dist",
-    "open": "opener https://wmhilton.com"
+    "open": "opener https://wmhilton.com",
+    "alias": "(cd dist && now alias wmhilton.com)"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,5 @@
   "devDependencies": {
     "jus": "^0.24.1",
     "opener": "^1.4.1"
-  },
-  "now": {
-    "alias": "wmhilton.com"
   }
 }
