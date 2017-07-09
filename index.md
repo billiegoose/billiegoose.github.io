@@ -33,6 +33,10 @@ These tools are all hovering around the 90% complete stage. I'm saving that last
 - [marky-markdown](https://github.com/npm/marky-markdown) I contributed the browserified bundle!
 - [node-modules.io](https://node-modules.io) I maintain a site dedicated to npm alternatives and host my own registry mirror
 
+## What about projects from college and earlier?
+
+Check out [Projects](./projects/)!
+
 ## Do you ever get paid to build websites?
 
 I do! Not all of them are still in existance. However, here are some recent commercial projects I've worked on that I'm proud of:
