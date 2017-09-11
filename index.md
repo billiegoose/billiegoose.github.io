@@ -13,7 +13,12 @@ title: wmhilton
 
 ## What am I working on?
 
-Bare metal programming!
+My two latest projects are extraordinary. They're not really ready for release (or even beta testing) but once they are, I'm going to write not just one, but a whole series of blog posts about them.
+
+- [esgit](https://github.com/wmhilton/esgit) A fully working implementation of `git` in ECMAScript that also happens to work *in the browser*. (See next item!)
+- [nde](https://nde.now.sh) Imagine Atom editor, but completely in client-side browser JavaScript, that you can use to develop your progressive web app. With hot-module reloading. And dynamic module loading (all of npm without the "npm install"). And full file system emulation, git, and Github integration! Oh, and did I mention it's self-hosted (you can edit the editor) and it caches everything offline with service workers?
+
+Prior to that: Bare metal programming!
 - Hardware! I got myself a [Nandland Go](https://www.nandland.com/goboard) FPGA board. Currently fiddling with I2C and SPI.
 - Assembly! Check out the gif of [It-boots-but-that's-about-it OS](https://github.com/wmhilton/boots) booting and reading a file from disk(ette).
 - C! Not technically bare metal, but my [dukboot](https://gitlab.com/dukboot/dukboot) project aims to build a tiny library OS around the [duktape](http://duktape.org) JS engine.
