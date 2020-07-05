@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Skype Telepresence Rover</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//yegor256.github.io/tacit/tacit.min.css">
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/favicon/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/favicon/favicon-16x16.png" sizes="16x16">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ffb300">
+    <link rel="shortcut icon" href="/favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#ffb300">
+    <meta name="msapplication-TileImage" content="/favicon/mstile-144x144.png">
+    <meta name="msapplication-config" content="/favicon/browserconfig.xml">
+    <meta name="theme-color" content="#ffb300">
+    <!-- http://realfavicongenerator.net/favicon_result?file_id=p1akurqbdbq0j1lpc14a618p2och6#.V1uVj_krK70 -->
+  </head>
+  <body>
+    <header>&#xA0;</header>
+    <section>
+      <article>
+        <!--
+title: Skype Telepresence Rover
+-->
+<h1 id="skype-telepresence-rover" class="deep-link"><a href="#skype-telepresence-rover">Skype Telepresence Rover</a></h1>
+<p><img src="IMG_20110109_184027.jpg" alt="The current prototype">
+<br><em>The current prototype.</em></p>
+<p>While on co-op in California, I often used Skype to video call my family. I even attended my brother&apos;s high school graduation virtually via Skype; from a laptop, I chatted with all my old friends from high school and joined in group conversations. People carried me around so I could say hi to everyone at the party. It was a great experience, but I depended on others for mobility. At one point, I was set down facing a wall for 10 minutes until someone noticed and turned me around.</p>
+<p>This got me thinking, what would it take to have a real telepresence? A full-blown telepresence robot like an <a href="http://anybots.com/">Anybot</a> or a <a href="http://www.willowgarage.com/pages/texai/overview">Texai</a> was out of the question; I&apos;m a college student on a shoe-string budget. But with the shrinking cost of electronics, I was convinced I could make a telepresence robot on a shoestring budget. All I had to do was integrate some existing technology: Skype, a netbook, and an RC car. I estimated I could make a telepresence robot for less than $300!</p>
+<p>Part List:</p>
+<ul>
+<li>A netbook with 2GB RAM, acquired from Craigslist for $150</li>
+<li>A $60 RC car from Meijer</li>
+<li>An $30 Arduino microcontroller to connect the laptop to the RC car</li>
+<li>Some wood and screws to mount the laptop and Arduino to the RC car</li>
+<li>Python code (using the Skype API) to send and receive steering and speed commands</li>
+</ul>
+<div class="youtube-video"><iframe width="560" height="315" src="https://www.youtube.com/embed/QsiM0Cjdzhk" frameborder="0" allowfullscreen></iframe></div>
+<p><em>This is from an earlier prototype that was built on a chassis that did not have a built-in motor controller.</em></p>
+<div class="youtube-video"><iframe width="560" height="315" src="https://www.youtube.com/embed/UroWCdb6SUo" frameborder="0" allowfullscreen></iframe></div>
+<p><em>For my second prototype, I used a complete electric car chassis, and reverse engineered the built-in motor controller. This video demonstrates applying a 3-5V input causing the wheels to spin, drawing power from the built-in battery, not the voltage source.</em></p>
+<p>I had hoped to make a video of the robot in action, but have been too distracted to add the joystick control needed to steer the robot properly. In the meanwhile, above are a couple of videos I took during the development of the Skype Rover.</p>
+<p>The idea is really simple. The rover has it&apos;s own Skype Account. When you call it, it automatically accepts the call and puts your video in full-screen mode so others can see you well. On the controlling end, a Python code lets you send steering and speed commands using the mouse or a joystick, and on the rover end is Python code that receives the commands and sends them through a USB cable to the Arduino, which controls voltages wired into the RC car&apos;s motor controller. It is a masterpiece of integration, really. The technologies for telepresence were just there, waiting to be connected with a little bit of solder and Python by some clever individual. If it works, thousands of DIY hobbiests could build one of these things in a weekend.</p>
+<p>The project is about 90% complete. Upon my return to UC, I decided I wanted to be able to give tours of the UC Engineering building via the Skype Rover. However, initial tests revealed the engineering building has too many Wi-Fi deadzones to be able to drive the robot down a hallway without disconnecting. I also discovered that the open-loop control combined with latency issues made the rover extremely difficult to drive. Disheartened, I have temporarily shelved the Skype Telepresence Rover in favor of pursuing other projects such as learning ROS, the Robot Operating System from Willow Garage.</p>
+<p>After finishing most of the code, I searched for similar projects on the Internet and found <a href="http://sparkyjr.ning.com/">Sparky Jr</a>. Sparky Jr. has a similar goal; however, my rover was less expensive because of the decision to use an RC car chassis and a netbook rather than a Roomba chassis and a Mac mini.</p>
+
+      </article>
+    </section>
+    <footer>&#xA0;</footer>
+  </body>
+</html>
