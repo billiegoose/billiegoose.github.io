@@ -1,4 +1,4 @@
 wmhilton.github.io
 ==================
 
-Website of William Hilton, roboticist.
+Website of William Hilton, web dev.
