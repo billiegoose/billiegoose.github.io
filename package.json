@@ -1,26 +1,25 @@
 {
-  "name": "@wmhilton/wmhilton.github.io.source",
+  "name": "@billiegoose/billiegoose.github.io.source",
   "version": "1.0.0",
-  "description": "William Hilton's website",
+  "description": "Billie Hilton's website",
   "scripts": {
     "start": "jus serve",
     "deploy": "npm run build && (cd dist && rm package.json && now --static)",
     "build": "jus build . dist",
     "commit": "git add dist && git commit -m deploy",
     "push": "git subrepo push dist",
-    "open": "opener https://wmhilton.com",
-    "alias": "(cd dist && now alias wmhilton.com)"
+    "open": "opener https://billiegoose.xyz"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wmhilton/wmhilton.github.io.git"
+    "url": "git+https://github.com/billiegoose/billiegoose.github.io.git"
   },
-  "author": "William Hilton <wmhilton@gmail.com>",
+  "author": "Billie Hilton <wmhilton@gmail.com>",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://github.com/wmhilton/wmhilton.github.io/issues"
+    "url": "https://github.com/billiegoose/billiegoose.github.io/issues"
   },
-  "homepage": "https://github.com/wmhilton/wmhilton.github.io#readme",
+  "homepage": "https://github.com/billiegoose/billiegoose.github.io#readme",
   "devDependencies": {
     "jus": "^0.24.1",
     "opener": "^1.4.1"

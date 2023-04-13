@@ -1,4 +1,4 @@
-wmhilton.github.io
+billiegoose.github.io
 ==================
 
-Website of William Hilton, web dev.
+Website of Billie Hilton, web dev.

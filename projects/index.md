@@ -4,13 +4,13 @@ title: Projects
 # Personal Projects
 
 ## Post-academia
-- [Declarative Shell Scripting](https://github.com/wmhilton/decshell)
-- [Transparent Lock Screen for Windows](https://github.com/wmhilton/lock-screen)
-- [TreeUI](https://github.com/wmhilton/treeui)
+- [Declarative Shell Scripting](https://github.com/billiegoose/decshell)
+- [Transparent Lock Screen for Windows](https://github.com/billiegoose/lock-screen)
+- [TreeUI](https://github.com/billiegoose/treeui)
 
 ## Graduate School
-- [Hubo-in-the-Browser](https://wmhilton.github.io/hubo-js)
-- [Image → 6502 Assembly](https://github.com/wmhilton/img2asm6502)
+- [Hubo-in-the-Browser](https://billiegoose.github.io/hubo-js)
+- [Image → 6502 Assembly](https://github.com/billiegoose/img2asm6502)
 
 ## College
 - [Skype Telepresence Rover](./skype-telepresence-rover/)

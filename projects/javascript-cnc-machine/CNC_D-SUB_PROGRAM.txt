@@ -1,4 +1,4 @@
-This is a D-sub socket cutting program.  Author: William Hilton
+This is a D-sub socket cutting program.  Author: Billie Hilton
 Use a 1/8 inch diameter HSS (high speed steel) mill that can drill holes. The tool's cutting depth should be slightly > 9mm. The metal to be cut is high carbon steel. Feed Rate = RPM * CHIPSIZE * NUM OF BLADES (Gracias Doug!) Use lowest belt, with dial at slightly below 4.
 
 Edit the program to cut different connector types:
