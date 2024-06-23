@@ -4,7 +4,6 @@
   "description": "Billie Hilton's website",
   "scripts": {
     "start": "jus serve",
-    "deploy": "npm run build && (cd dist && rm package.json && now --static)",
     "build": "jus build . dist",
     "commit": "git add dist && git commit -m deploy",
     "push": "git subrepo push dist",
@@ -21,7 +20,6 @@
   },
   "homepage": "https://github.com/billiegoose/billiegoose.github.io#readme",
   "devDependencies": {
-    "jus": "^0.24.1",
-    "opener": "^1.4.1"
+    "jus": "^0.26.0"
   }
 }
